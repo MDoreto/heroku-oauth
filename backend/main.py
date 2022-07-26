@@ -11,9 +11,10 @@ import requests as req
 app = FastAPI()
 
 security = HTTPBearer()
+origins=["https://prometeon-frontend.herokuapp.com/","https://prometeon-frontend.herokuapp.com","*"]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://prometeon-frontend.herokuapp.com/","https://prometeon-frontend.herokuapp.com","*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
