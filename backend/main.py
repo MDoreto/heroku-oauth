@@ -4,12 +4,10 @@ from pydantic import BaseSettings
 from functools import lru_cache
 from google.oauth2 import id_token
 from google.auth.transport import requests
-from fastapi.security import HTTPBasicCredentials, HTTPBearer
 import requests as req
 
 app = FastAPI()
 
-security = HTTPBearer()
 origins=["https://prometeon-frontend.herokuapp.com/","https://prometeon-frontend.herokuapp.com","*"]
 app.add_middleware(
     CORSMiddleware,
@@ -47,6 +45,5 @@ def auth_google(code: str = Form(), client_id: str = Form()):
         return None
     
 @app.get("/auth/user")
-async def get_user(credentials: HTTPBasicCredentials = Depends(security)):
-    token = credentials.credentials
-    return token
+async def get_user():
+    return None
