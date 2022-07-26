@@ -69,5 +69,7 @@ def auth_google(code: str = Form(), client_id: str = Form(), Authorize: AuthJWT 
         return None
     
 @app.get("/auth/user")
-async def get_user():
-    return None
+async def get_user(Authorize: AuthJWT = Depends()):
+    Authorize.jwt_required()
+    current_user = Authorize.get_jwt_subject()
+    return {"user": current_user}
