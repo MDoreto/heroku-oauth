@@ -5,13 +5,12 @@ from functools import lru_cache
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from fastapi.security import HTTPBasicCredentials, HTTPBearer
-from jose import jwt
 import requests as req
 
 app = FastAPI()
 
 security = HTTPBearer()
-origins=["https://prometeon-frontend.herokuapp.com/","https://prometeon-frontend.herokuapp.com","*"]
+origins=["https://prometeon-frontend.herokuapp.com"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -44,7 +43,6 @@ def auth_google(code: str = Form(), client_id: str = Form()):
         userid = idinfo['sub']
         return userid
     except ValueError:
-        print("Error")
         return None
     
 @app.get("/auth/user")
