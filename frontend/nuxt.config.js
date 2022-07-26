@@ -55,6 +55,7 @@ export default {
   auth: {
     strategies: {
       google: {
+        cookie: { name: 'csrf_access_token' },
         clientId: process.env.CLIENT_ID,
         codeChallengeMethod: '',
         responseType: 'code',
@@ -62,6 +63,9 @@ export default {
           token: process.env.API_URL +'user/google', // somm backend url to resolve your auth with google and give you the token back
           userInfo: process.env.API_URL +'auth/user' // the endpoint to get the user info after you recived the token 
         },
+        user: {
+          property: false,
+        }
       },
     }
   },
