@@ -43,7 +43,10 @@ class Settings(BaseModel):
     authjwt_access_token_expires=43200
 
 
-
+@AuthJWT.load_config
+def get_config():
+    return Settings()
+    
 @app.get("/")
 async def root():
     return {"msg": "Hello World"}
