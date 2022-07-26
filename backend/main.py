@@ -20,7 +20,6 @@ app.add_middleware(
 )
 
 class Settings(BaseSettings):
-    client_id:str
     client_secret:str
     ui_url:str
 
