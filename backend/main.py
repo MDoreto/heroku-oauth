@@ -12,13 +12,10 @@ class Settings(BaseSettings):
     client_id:str
     client_secret:str
     ui_url:str
-    class Config:
-        env_file = '.env'
 
 @lru_cache()
 def get_settings():
     return Settings()
-
 app = FastAPI()
 security = HTTPBearer()
 app.add_middleware(
@@ -48,7 +45,6 @@ def auth_google(code: str = Form(), client_id: str = Form()):
         userid = idinfo['sub']
         return userid
     except ValueError:
-        # Invalid token
         print("Error")
         return None
     
