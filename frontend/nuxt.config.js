@@ -59,8 +59,8 @@ export default {
         codeChallengeMethod: '',
         responseType: 'code',
         endpoints: {
-          token: process.env.API_URL +'user/google/', // somm backend url to resolve your auth with google and give you the token back
-          userInfo: process.env.API_URL +'auth/user/' // the endpoint to get the user info after you recived the token 
+          token: process.env.API_URL +'user/google', // somm backend url to resolve your auth with google and give you the token back
+          userInfo: process.env.API_URL +'auth/user' // the endpoint to get the user info after you recived the token 
         },
       },
     }
