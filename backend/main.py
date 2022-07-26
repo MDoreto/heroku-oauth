@@ -20,7 +20,6 @@ app.add_middleware(
 )
 
 class Settings(BaseSettings):
-    client_id:str
     client_secret:str
     ui_url:str
 
@@ -36,8 +35,9 @@ async def root():
 def auth_google(code: str = Form(), client_id: str = Form()):
     settings = get_settings()
     url='https://accounts.google.com/o/oauth2/token'
-    params = {"grant_type":"authorization_code","code":code,"client_id":client_id,"client_secret":settings.client_secret, "redirect_uri":settings.ui_url +"/login"}
+    params = {"grant_type":"authorization_code","code":code,"client_id":client_id,"client_secret":settings.client_secret, "redirect_uri":settings.ui_url +"login"}
     r = req.post(url, params=params).json()
+    print(r)
     try:
         idinfo = id_token.verify_oauth2_token(r['id_token'], requests.Request(), client_id)
         userid = idinfo['sub']
