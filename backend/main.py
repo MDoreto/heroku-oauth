@@ -8,6 +8,17 @@ from fastapi.security import HTTPBasicCredentials, HTTPBearer
 from jose import jwt
 import requests as req
 
+app = FastAPI()
+
+security = HTTPBearer()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://prometeon-frontend.herokuapp.com/","https://prometeon-frontend.herokuapp.com","*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 class Settings(BaseSettings):
     client_id:str
     client_secret:str
@@ -16,17 +27,6 @@ class Settings(BaseSettings):
 @lru_cache()
 def get_settings():
     return Settings()
-app = FastAPI()
-security = HTTPBearer()
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-
 
 @app.get("/")
 async def root():
